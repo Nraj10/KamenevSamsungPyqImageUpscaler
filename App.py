@@ -6,6 +6,7 @@ import design
 import os
 
 class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
+    imgPath = ""
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -13,8 +14,8 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.InputImageButton.clicked.connect(self.getImagePath)
 
     def getImagePath(self):
-        path = QtWidgets.QFileDialog.getOpenFileName(self, "Выберите изображение", filter='*.png, *.jpg')
-        self.loadImageInBrowser(path)
+        imgPath = QtWidgets.QFileDialog.getOpenFileName(self, "Выберите изображение", filter='*.png, *.jpg')
+        self.loadImageInBrowser(imgPath)
 
     def loadImageInBrowser(self, path):
         image_qt = QImage(path[0])
