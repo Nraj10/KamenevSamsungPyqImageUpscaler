@@ -3,6 +3,7 @@ from PyQt5 import QtWidgets
 
 from App import App
 
+
 def main():
     app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
     window = App()  # Создаём объект класса ExampleApp

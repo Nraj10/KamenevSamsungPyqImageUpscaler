@@ -4,6 +4,10 @@ from PyQt5.QtWidgets import QGraphicsPixmapItem, QGraphicsScene
 
 import design
 import os
+import PythonScripts.Operations.OpenCv2ImageUpscaler
+import PythonScripts.Operations.ImageSegmentationOperation
+import PythonScripts.Operations.PytorchImageUpscaler
+
 
 class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
     imgPath = ""
@@ -25,3 +29,13 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         scene.addItem(pic)
         self.ImageBrowser.setScene(scene)
 
+
+    def cv2upscalePipeline(self):
+        if self.TileCheckBox.isChecked():
+            return 0
+        else:
+            return 0
+
+
+    def pytorchUpscalePipeLine(self):
+        return 0

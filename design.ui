@@ -36,6 +36,23 @@
      <property name="formAlignment">
       <set>Qt::AlignCenter</set>
      </property>
+     <item row="0" column="0">
+      <widget class="QCheckBox" name="TileCheckBox">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Включить разделение на тайлы?</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="0">
       <widget class="QSpinBox" name="TileSize">
        <property name="maximum">
@@ -46,8 +63,22 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Размер тайла</string>
+       </property>
+      </widget>
+     </item>
      <item row="2" column="0">
       <widget class="QComboBox" name="ModelComboBox"/>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Модель</string>
+       </property>
+      </widget>
      </item>
      <item row="3" column="0">
       <widget class="QPushButton" name="InputImageButton">
@@ -63,27 +94,6 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Размер тайла</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Модель</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>Выбор изображения</string>
-       </property>
-      </widget>
-     </item>
      <item row="4" column="1">
       <widget class="QLabel" name="label_4">
        <property name="text">
@@ -91,17 +101,10 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
-      <widget class="QCheckBox" name="TileCheckBox">
+     <item row="3" column="1">
+      <widget class="QLabel" name="label_3">
        <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>Включить разделение на тайлы?</string>
+        <string>Выбор изображения</string>
        </property>
       </widget>
      </item>
@@ -126,6 +129,28 @@
       <height>251</height>
      </rect>
     </property>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>360</y>
+      <width>231</width>
+      <height>211</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>Значение метрик</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextBrowser" name="textBrowser"/>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

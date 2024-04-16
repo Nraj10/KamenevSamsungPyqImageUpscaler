@@ -4,7 +4,7 @@ class tileOperations:
     import PIL
     from PIL import Image
     from itertools import product
-    from alive_progress import alive_bar
+    # from alive_progress import alive_bar
 
     PIL.Image.MAX_IMAGE_PIXELS = 933120000
 
@@ -56,23 +56,3 @@ class tileOperations:
         images = [pyvips.Image.new_from_file(filename) for filename in filepath]
         final = pyvips.Image.arrayjoin(images, across=tiles)
         final.pngsave(imageDirectory + ".png")
-
-    # tiles = tile(r"C:\Users\Nraj\Desktop\d",512)
-    # print(tiles)
-    # merge(r"C:\Users\Nraj\Desktop\d\Output", tiles)
-
-    # def tile(filename, dir_in, dir_out, d):
-    #     name, ext = os.path.splitext(filename)
-    #     img = Image.open(os.path.join(dir_in, filename))
-    #     w, h = img.size
-    #
-    #     grid = product(range(0, h - h % d, d), range(0, w - w % d, d))
-    #     length = sum(1 for x in product(range(0, h - h % d, d), range(0, w - w % d, d)))
-    #     with alive_bar(length, force_tty=True) as bar:
-    #         for i, j, c in (grid):
-    #             bar()
-    #             print(i,j)
-    #             box = (j, i, j + d, i + d)
-    #             out = os.path.join(dir_out, f'{name}_{i}_{j}{ext}')
-    #             img.crop(box).save(out)
-    #     return math.floor(w/d)
