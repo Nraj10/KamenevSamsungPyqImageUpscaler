@@ -14,6 +14,9 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
 
     def getImagePath(self):
         path = QtWidgets.QFileDialog.getOpenFileName(self, "Выберите изображение", filter='*.png, *.jpg')
+        self.loadImageInBrowser(path)
+
+    def loadImageInBrowser(self, path):
         image_qt = QImage(path[0])
         pic = QGraphicsPixmapItem()
         pic.setPixmap(QPixmap.fromImage(image_qt))
