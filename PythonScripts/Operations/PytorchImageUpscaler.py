@@ -7,6 +7,7 @@ from torchvision.utils import save_image
 
 
 class pytorchUpscaler:
+    Labels = ["Pytorch-модель"]
     def UpcsalerInference(self):
         model = Upscaler()
         model.load_state_dict(torch.load('upscaler_model.pth'))

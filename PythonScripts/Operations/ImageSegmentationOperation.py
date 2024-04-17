@@ -8,11 +8,11 @@ class tileOperations:
 
     PIL.Image.MAX_IMAGE_PIXELS = 933120000
 
-    def tile(self, dir_in, imageWidght):
+    def tile(self, dir_in, filename, imageWidght):
         import shutil
 
-        name, ext = self.os.path.splitext('input.png')
-        img = self.Image.open(self.os.path.join(dir_in, 'input.png'))
+        name, ext = self.os.path.splitext(filename.split(self.os.sep)[-1])
+        img = self.Image.open(filename)
         newDir = self.os.path.join(dir_in, 'Output')
 
         # Check if the directory already exists
@@ -34,12 +34,13 @@ class tileOperations:
         return self.math.floor(w / imageWidght)
 
     def merge(self, imageDirectory, tiles):
-        vipsbin = r'C:\Users\Nraj\Desktop\vips-dev-8.15\bin'
-        add_dll_dir = getattr(self.os, 'add_dll_directory', None)
-        if callable(add_dll_dir):
-            add_dll_dir(vipsbin)
-        else:
-            self.os.environ['PATH'] = self.os.pathsep.join((vipsbin, self.os.environ['PATH']))
+        vipsbin = r'F:\vips-dev-8.15\bin'
+        # add_dll_dir = getattr(self.os, 'add_dll_directory', None)
+        # if callable(add_dll_dir):
+        #     add_dll_dir(vipsbin)
+        # else:
+        #     self.os.environ['PATH'] = self.os.pathsep.join((vipsbin, self.os.environ['PATH']))
+        self.os.environ['PATH'] = self.os.pathsep.join((vipsbin, self.os.environ['PATH']))
 
         import pyvips
 
