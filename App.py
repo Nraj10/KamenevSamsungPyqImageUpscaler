@@ -6,15 +6,14 @@ import design
 import os
 from PythonScripts.Operations.OpenCv2ImageUpscaler import cv2upscaler
 from PythonScripts.Operations.ImageSegmentationOperation import tileOperations
-import PythonScripts.Operations.PytorchImageUpscaler
-from PythonScripts.Operations import ImageSegmentationOperation
+from PythonScripts.Operations.PytorchImageUpscaler import pytorchUpscaler
 
 
 class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
     imgPath = ""
     outputDir = ""
+    ext = ""
     tilenumber = 0
-
 
     def __init__(self):
         super().__init__()
@@ -24,10 +23,14 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.StartInferenceButton.clicked.connect(self.Accept)
         for i in cv2upscaler.Labels:
             self.ModelComboBox.addItem(i, i)
+        for i in pytorchUpscaler.Labels:
+            self.ModelComboBox.addItem(i, i)
 
     def getImagePath(self):
         self.imgPath = QtWidgets.QFileDialog.getOpenFileName(self, "Выберите изображение", filter='*.png *.jpg')[0]
         self.outputDir = os.path.dirname(self.imgPath) + "/UpscaleOutput"
+        trash, self.ext = os.path.splitext(self.imgPath)
+
         self.loadImageInBrowser(self.imgPath, self.ImageBrowser)
 
     def loadImageInBrowser(self, path, browser):
@@ -43,7 +46,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
             self.cv2upscalePipeline()
         else:
             self.pytorchUpscalePipeLine()
-        self.loadImageInBrowser(self.imgPath, self.ImageBrowserOut)
+        self.loadImageInBrowser(self.outputDir+"/Output.png", self.ImageBrowserOut)
         self.textBrowser.append("Выходной файл - " + self.outputDir + "Output.png")
         self.textBrowser.append("Количество тайлов - " +
                                 str(self.tilenumber))
@@ -70,8 +73,13 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         labels.sort()
         filepath = []
         for i in labels:
-            filepath.append(self.outputDir + "/Output" '\\' + str(i) + '.png')
+            filepath.append(self.outputDir + "/Output" '\\' + str(i) + self.ext)
         return filepath
 
     def pytorchUpscalePipeLine(self):
-        return 0
+        outputDir = self.outputDir
+        tilenum = tileOperations.tile(self=tileOperations, dir_in=outputDir, filename=self.imgPath, imageWidght=self.TileSize.value())
+        self.tilenumber = tilenum
+        filepaths = self.GetImagePaths()
+        pytorchUpscaler.UpcsalerInference(self=pytorchUpscaler, imgpaths= filepaths, size=self.TileSize.value() )
+        tileOperations.merge(self=tileOperations, imageDirectory=outputDir + "/Output", tiles=tilenum)

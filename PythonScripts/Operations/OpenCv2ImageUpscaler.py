@@ -1,3 +1,6 @@
+import os
+
+
 class cv2upscaler:
     import cv2
     import os
@@ -15,7 +18,7 @@ class cv2upscaler:
         self.cv2.imwrite(imagepath, img)
 
     def ImageUpscaleNeuro(self, model, modelname, imagepath):
-        modeldir = r'C:\Users\Nraj\AppData\Roaming\QGIS\QGIS3\profiles\default\python\plugins\simple_neuroupscaler\Models\OpenCV2'
+        modeldir = os.path.join(os.getcwd(), 'Models', 'OpenCV2')
         self.sr.readModel(self.os.path.join(modeldir, str(model)))
         self.sr.setModel(modelname, 2)
         img = self.cv2.imread(imagepath)
