@@ -7,7 +7,7 @@ import os
 from PythonScripts.Operations.OpenCv2ImageUpscaler import cv2upscaler
 from PythonScripts.Operations.ImageSegmentationOperation import tileOperations
 from PythonScripts.Operations.PytorchImageUpscaler import pytorchUpscaler
-
+import time
 
 class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
     imgPath = ""
@@ -27,7 +27,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
             self.ModelComboBox.addItem(i, i)
 
     def getImagePath(self):
-        self.imgPath = QtWidgets.QFileDialog.getOpenFileName(self, "Выберите изображение", filter='*.png *.jpg')[0]
+        self.imgPath = QtWidgets.QFileDialog.getOpenFileName(self, "Выберите изображение", filter='*.jpg')[0]
         self.outputDir = os.path.dirname(self.imgPath) + "/UpscaleOutput"
         trash, self.ext = os.path.splitext(self.imgPath)
 
@@ -42,6 +42,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         browser.setScene(scene)
 
     def Accept(self):
+        begTime = time.time()
         if self.ModelComboBox.currentText() in cv2upscaler.Labels:
             self.cv2upscalePipeline()
         else:
@@ -50,6 +51,8 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.textBrowser.append("Выходной файл - " + self.outputDir + "Output.png")
         self.textBrowser.append("Количество тайлов - " +
                                 str(self.tilenumber))
+        self.textBrowser.append("Время - " +
+                                str(time.time() - begTime) + " секунд")
 
 
 

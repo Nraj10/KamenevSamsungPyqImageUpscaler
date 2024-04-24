@@ -52,7 +52,7 @@ class tileOperations:
         labels.sort()
         filepath = []
         for i in labels:
-            filepath.append(imageDirectory + '\\' + str(i) + '.png')
+            filepath.append(imageDirectory + '\\' + str(i) + '.jpg')
 
         images = [pyvips.Image.new_from_file(filename) for filename in filepath]
         final = pyvips.Image.arrayjoin(images, across=tiles)
