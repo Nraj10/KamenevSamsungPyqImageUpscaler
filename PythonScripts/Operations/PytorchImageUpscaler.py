@@ -16,7 +16,7 @@ class pytorchUpscaler:
 
     def UpcsalerInference(self, imgpaths, size):
         model = Upscaler(input_size=size)
-        model.load_state_dict(torch.load(f=os.path.join(os.getcwd(), 'Models', 'Pytorch', 'modelDict.pt')))
+        model.load_state_dict(torch.load(f=os.path.join(os.getcwd(), 'Models', 'Pytorch', 'bestModel.pt')))
         model.eval()
 
         # Define the preprocessing transformations
